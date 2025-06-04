@@ -3,11 +3,13 @@ import requests
 from typing import Dict, Any
 
 class ElasticsearchClient:
+    base_url = None
+    headers = None
     def __init__(self, base_url: str, username: str, password: str):
-        self.base_url = base_url
+        ElasticsearchClient.base_url = base_url
         credentials = f"{username}:{password}"
         token = base64.b64encode(credentials.encode()).decode()
-        self.headers = {
+        ElasticsearchClient.headers = {
             "Authorization": f"Basic {token}",
             "Content-Type": "application/json",
         }
